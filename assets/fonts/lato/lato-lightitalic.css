@@ -1,0 +1,14 @@
+
+@font-face {
+  font-family: 'lato-lightitalic';
+  src: url('lato-lightitalic-webfont.eot?#iefix') format('embedded-opentype'),
+    url('lato-lightitalic-webfont.woff') format('woff'),
+    url('lato-lightitalic-webfont.ttf')  format('truetype'),
+    url('lato-lightitalic-webfont.svg#lato-lightitalic') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.lato-lightitalic {
+  font-family:"lato-lightitalic", sans-serif;
+}

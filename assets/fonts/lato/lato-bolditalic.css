@@ -1,0 +1,14 @@
+
+@font-face {
+  font-family: 'lato-bolditalic';
+  src: url('lato-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
+    url('lato-bolditalic-webfont.woff') format('woff'),
+    url('lato-bolditalic-webfont.ttf')  format('truetype'),
+    url('lato-bolditalic-webfont.svg#lato-bolditalic') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.lato-bolditalic {
+  font-family:"lato-bolditalic", sans-serif;
+}

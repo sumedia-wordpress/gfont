@@ -1,0 +1,33 @@
+<?php
+
+if (!defined('SUMEDIA_BASE_VERSION')) {
+    header( 'Status: 403 Forbidden' );
+    header( 'HTTP/1.1 403 Forbidden' );
+    exit();
+}
+
+$fontlist_table = new Sumedia_GFont_Fontlist_Table();
+
+?>
+<div class="wrap" id="suma-wrap">
+    <div class="suma-content">
+        <div class="suma-heading">
+            <img src="<?php echo SUMEDIA_PLUGIN_URL . 'sumedia-base/assets/images/kolibri-logo.png'; ?>" alt="Sumedia" />
+            <h1><?php echo __('Google Fonts Configuration', 'sumedia-gfont'); ?></h1>
+        </div>
+    </div>
+    <div class="suma-content">
+        <a class="button" href="<?php echo admin_url('admin.php?page=sumedia&plugin=gfont&action=reload_fonts&nonce=' . wp_create_nonce('sumedia-gfont-reload-fonts')); ?>">
+            <?php echo __('Initialize/Reload Font Database', 'sumedia-gfont'); ?>
+        </a>
+    </div>
+    <div class="suma-content">
+        <form class="suma-form" name="suma-gfont-fontlist-form" action="<?php echo admin_url('admin.php?page=sumedia&plugin=gfont&action=use_flag'); ?>" method="post">
+            <h2><?php echo __('Use Google Fonts', 'sumedia-gfont'); ?></h2>
+            <?php
+                $fontlist_table->prepare_items();
+                $fontlist_table->display();
+            ?>
+        </form>
+    </div>
+</div>

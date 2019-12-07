@@ -1,0 +1,14 @@
+
+@font-face {
+  font-family: 'lato-thinitalic';
+  src: url('lato-thinitalic-webfont.eot?#iefix') format('embedded-opentype'),
+    url('lato-thinitalic-webfont.woff') format('woff'),
+    url('lato-thinitalic-webfont.ttf')  format('truetype'),
+    url('lato-thinitalic-webfont.svg#lato-thinitalic') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.lato-thinitalic {
+  font-family:"lato-thinitalic", sans-serif;
+}
