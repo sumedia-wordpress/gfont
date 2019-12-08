@@ -44,15 +44,8 @@ if (!function_exists( 'add_filter')) {
     exit();
 }
 
-if (!defined('SUMEDIA_BASE_VERSION')) {
-    if (!function_exists('sumedia_missing_base_notice')) {
-        add_action('admin_notices', 'sumedia_missing_base_notice');
-        function sumedia_missing_base_notice()
-        {
-            return '<div id="message" class="error fade"><p>' . __('In order to use Sumedia Plugins you need to install Sumedia Base Plugin (sumedia-base).') . '</p></div>';
-        }
-    }
-}
+require_once(__DIR__ . str_replace('/', DIRECTORY_SEPARATOR, '/vendor/autoload.php'));
+require_once(__DIR__ . DIRECTORY_SEPARATOR . 'sumedia-base.php');
 
 define('SUMEDIA_GFONT_VERSION', '0.1.1');
 define('SUMEDIA_GFONT_PLUGIN_NAME', dirname(plugin_basename(__FILE__)));
