@@ -11,7 +11,7 @@
  * Plugin Name: Sumedia Google Fonts
  * Plugin URI:  https://github.com/sumedia-wordpress/gfont
  * Description: Use Google Fonts with non-tracking data privacy
- * Version:     0.1.0
+ * Version:     0.1.1
  * Requires at least: 5.3 (nothing else tested yet)
  * Rewrires PHP: 5.6.0 (not tested, could work)
  * Author:      Sven Ullmann
@@ -54,12 +54,21 @@ if (!defined('SUMEDIA_BASE_VERSION')) {
     }
 }
 
-define('SUMEDIA_GFONT_VERSION', '0.1.0');
+define('SUMEDIA_GFONT_VERSION', '0.1.1');
 define('SUMEDIA_GFONT_PLUGIN_NAME', dirname(plugin_basename(__FILE__)));
 
 require_once(__DIR__ . str_replace('/', DIRECTORY_SEPARATOR, '/inc/class-installer.php'));
 $installer = new Sumedia_GFont_Installer;
 register_activation_hook(__FILE__, [$installer, 'install']);
+
+add_action('plugins_loaded', 'sumedia_gfont_textdomain');
+function sumedia_gfont_textdomain()
+{
+    load_plugin_textdomain(
+        'sumedia-gfont',
+        false,
+        SUMEDIA_GFONT_PLUGIN_NAME . DIRECTORY_SEPARATOR . 'languages');
+}
 
 add_action('init', 'sumedia_gfont_init', 10);
 function sumedia_gfont_init()

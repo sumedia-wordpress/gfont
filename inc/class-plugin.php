@@ -4,22 +4,9 @@ class Sumedia_GFont_Plugin
 {
     public function init()
     {
-        $this->textdomain();
         $this->view();
-
         $this->post_use_flags();
         $this->post_reload_fonts();
-    }
-
-    public function textdomain()
-    {
-        //$event = new Sumedia_Base_Event(function () {
-        load_plugin_textdomain(
-            'sumedia-gfont',
-            false,
-            SUMEDIA_GFONT_PLUGIN_NAME . '/languages/');
-        //});
-        //add_action('plugins_loaded', [$event, 'execute']);
     }
 
     public function view()
@@ -58,7 +45,7 @@ class Sumedia_GFont_Plugin
     public function post_use_flags()
     {
         if (isset($_GET['plugin']) && $_GET['plugin'] == 'gfont'
-            && isset($_GET['action']) && $_GET['action'] == 'use_flag'
+            && isset($_POST['action']) && $_POST['action'] == 'use_flag'
         ) {
             if (wp_verify_nonce($_POST['_wpnonce'], 'bulk-plugins_page_sumedia')) {
                 $form = new Sumedia_GFont_Fontlist_Form();
@@ -75,7 +62,7 @@ class Sumedia_GFont_Plugin
 
     public function post_reload_fonts()
     {
-        if(isset($_GET['plugin']) && $_GET['plugin'] = 'gfont'
+        if(isset($_GET['plugin']) && $_GET['plugin'] == 'gfont'
                 && isset($_GET['action']) && $_GET['action'] == 'reload_fonts') {
             if (wp_verify_nonce($_GET['nonce'], 'sumedia-gfont-reload-fonts')) {
                 $reloader = new Sumedia_GFont_Reload_Fontlist();
