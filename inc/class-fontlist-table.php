@@ -81,8 +81,6 @@ class Sumedia_GFont_Fontlist_Table extends WP_List_Table
             $sortable
         );
 
-        $this->process_bulk_action();
-
         $table_name = $wpdb->prefix . $this->_table_name;
         $query = "SELECT * FROM `" . $table_name . "`";
         $this->items = $wpdb->get_results($query, ARRAY_A);
