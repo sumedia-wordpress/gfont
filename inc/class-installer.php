@@ -7,11 +7,6 @@ class Sumedia_GFont_Installer
     /**
      * @var string
      */
-    protected $installedVersion;
-
-    /**
-     * @var string
-     */
     protected $currentVersion;
 
     /**
@@ -20,35 +15,34 @@ class Sumedia_GFont_Installer
     protected $optionName = 'sumedia_gfont_version';
 
     /**
-     * @var wpdb
+     * @var string
      */
-    protected $db;
+    protected $table_name = 'sumedia_gfont_fonts';
 
     public function __construct()
     {
-        global $wpdb;
-        $this->installedVersion = get_option('sumedia_gfont_version');
         $this->currentVersion = SUMEDIA_GFONT_VERSION;
-        $this->db = $wpdb;
     }
 
     public function install()
     {
-
-        if (-1 == version_compare($this->installedVersion, $this->currentVersion)) {
-            if (-1 == version_compare($this->installedVersion, '0.1.0')) {
-                $this->install_gfont_table();
-            }
-            //add_option($this->optionName, $this->currentVersion);
-        }
+        $this->install_gfont_table();
+        add_option($this->optionName, $this->currentVersion);
     }
 
     protected function install_gfont_table()
     {
-        $charset_collate = $this->db->get_charset_collate();
-        $table_name = $this->db->prefix . 'sumedia_gfont_fonts';
+        global $wpdb;
+        $table_name = $wpdb->prefix . $this->table_name;
 
-        $sql = "CREATE TABLE IF NOT EXISTS `$table_name` (
+        $query = "SHOW TABLES LIKE '" . $table_name . "'";
+        $row = $wpdb->get_row($query);
+        if ($row) {
+            return;
+        }
+
+        $charset_collate = $wpdb->get_charset_collate();
+        $sql = "CREATE TABLE `$table_name` (
             `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
             `fontfamily` VARCHAR(128) NOT NULL,
             `fontname` VARCHAR(128) NOT NULL,            

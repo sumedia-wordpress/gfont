@@ -31,7 +31,7 @@ class Sumedia_GFont_Plugin
         ];
 
         if (isset($_REQUEST['page']) && $_REQUEST['page'] == 'sumedia' && isset($_REQUEST['plugin']) && $_REQUEST['plugin'] == 'gfont') {
-            $view->get('sumedia_base_admin_view_menu')->template = Suma\ds(SUMEDIA_PLUGIN_PATH . SUMEDIA_GFONT_PLUGIN_NAME . ds('/admin/templates/config.phtml'));
+            $view->get('sumedia_base_admin_view_menu')->template = Suma\ds(SUMEDIA_PLUGIN_PATH . SUMEDIA_GFONT_PLUGIN_NAME . '/admin/templates/config.phtml');
 
             $heading = $view->get('sumedia_base_admin_view_heading');
             $heading->title = __('Google Fonts');
