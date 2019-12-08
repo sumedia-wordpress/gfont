@@ -2,6 +2,15 @@
 
 class Sumedia_GFont_Plugin
 {
+    public function init()
+    {
+        $this->textdomain();
+        $this->view();
+
+        $this->post_use_flags();
+        $this->post_reload_fonts();
+    }
+
     public function textdomain()
     {
         //$event = new Sumedia_Base_Event(function () {
@@ -13,22 +22,16 @@ class Sumedia_GFont_Plugin
         //add_action('plugins_loaded', [$event, 'execute']);
     }
 
-    public function installer()
-    {
-        $installer = new Sumedia_GFont_Installer;
-        register_activation_hook(__FILE__, [$installer, 'install']);
-    }
-
     public function view()
     {
         $view = Sumedia_Base_Registry::get_instance('view');
         $plugins = $view->get('sumedia_base_admin_view_plugins');
         $plugins->plugins[SUMEDIA_GFONT_PLUGIN_NAME] = [
-            'description_template' => SUMEDIA_PLUGIN_PATH . SUMEDIA_GFONT_PLUGIN_NAME . '/admin/templates/plugin.phtml'
+            'description_template' => Suma\ds(SUMEDIA_PLUGIN_PATH . SUMEDIA_GFONT_PLUGIN_NAME . '/admin/templates/plugin.phtml')
         ];
 
         if (isset($_REQUEST['page']) && $_REQUEST['page'] == 'sumedia' && isset($_REQUEST['plugin']) && $_REQUEST['plugin'] == 'gfont') {
-            $view->get('sumedia_base_admin_view_menu')->template = SUMEDIA_PLUGIN_PATH . SUMEDIA_GFONT_PLUGIN_NAME . ds('/admin/templates/config.phtml');
+            $view->get('sumedia_base_admin_view_menu')->template = Suma\ds(SUMEDIA_PLUGIN_PATH . SUMEDIA_GFONT_PLUGIN_NAME . ds('/admin/templates/config.phtml'));
 
             $heading = $view->get('sumedia_base_admin_view_heading');
             $heading->title = __('Google Fonts');

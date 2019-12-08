@@ -1,3 +1,12 @@
+<?php
+
+if (!defined('SUMEDIA_BASE_VERSION')) {
+    header( 'Status: 403 Forbidden' );
+    header( 'HTTP/1.1 403 Forbidden' );
+    exit();
+}
+
+?>
 <h3><?php echo __('Google Fonts', 'sumedia-gfont'); ?> <small><?php echo SUMEDIA_GFONT_VERSION; ?></small></h3>
 <small>sumedia-gfont</small>
 <div class="sumedia-overview-plugin">

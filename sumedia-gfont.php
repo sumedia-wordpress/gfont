@@ -13,7 +13,7 @@
  * Description: Use Google Fonts with non-tracking data privacy
  * Version:     0.1.0
  * Requires at least: 5.3 (nothing else tested yet)
- * Rewrires PHP: 5.3.2 (not tested, could work)
+ * Rewrires PHP: 5.6.0 (not tested, could work)
  * Author:      Sven Ullmann
  * Author URI:  https://www.sumedia-webdesign.de
  * License:     GPL v3
@@ -44,35 +44,31 @@ if (!function_exists( 'add_filter')) {
     exit();
 }
 
-add_action('plugins_loaded', 'sumedia_gfont_initialize', 10);
+if (!defined('SUMEDIA_BASE_VERSION')) {
+    if (!function_exists('sumedia_missing_base_notice')) {
+        add_action('admin_notices', 'sumedia_missing_base_notice');
+        function sumedia_missing_base_notice()
+        {
+            return '<div id="message" class="error fade"><p>' . __('In order to use Sumedia Plugins you need to install Sumedia Base Plugin (sumedia-base).') . '</p></div>';
+        }
+    }
+}
 
-function sumedia_gfont_initialize()
+define('SUMEDIA_GFONT_VERSION', '0.1.0');
+define('SUMEDIA_GFONT_PLUGIN_NAME', dirname(plugin_basename(__FILE__)));
+
+require_once(__DIR__ . str_replace('/', DIRECTORY_SEPARATOR, '/inc/class-installer.php'));
+$installer = new Sumedia_GFont_Installer;
+register_activation_hook(__FILE__, [$installer, 'install']);
+
+add_action('init', 'sumedia_gfont_init', 10);
+function sumedia_gfont_init()
 {
-    if (!defined('SUMEDIA_BASE_VERSION')) {
-        if (!function_exists('sumedia_base_plugin_missing_message')) {
-            function sumedia_base_plugin_missing_message()
-            {
-                return print '<div id="message" class="error fade"><p>' . __('In order to use Sumedia Plugins you need to install Sumedia Base Plugin (sumedia-base).') . '</p></div>';
-            }
-            add_action('admin_notices', 'sumedia_base_plugin_missing_messsage');
-        }
-    } else {
-        if (defined('SUMEDIA_GFONT_VERSION')) {
-            return;
-        }
-
-        define('SUMEDIA_GFONT_VERSION', '0.1.0');
-        define('SUMEDIA_GFONT_PLUGIN_NAME', dirname(plugin_basename(__FILE__)));
-
+    if (defined('SUMEDIA_BASE_VERSION')) {
         $autoloader = Sumedia_Base_Autoloader::get_instance();
         $autoloader->register_autoload_dir(SUMEDIA_GFONT_PLUGIN_NAME, 'inc');
 
         $plugin = new Sumedia_GFont_Plugin();
-        $plugin->textdomain();
-        $plugin->installer();
-        $plugin->view();
-
-        $plugin->post_use_flags();
-        $plugin->post_reload_fonts();
+        $plugin->init();
     }
 }

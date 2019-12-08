@@ -71,7 +71,7 @@ class Sumedia_GFont_Reload_Fontlist
     public function get_font_list()
     {
         $list = array();
-        $dir = plugin_dir_path(__DIR__) . '/assets/fonts';
+        $dir = Suma\ds(plugin_dir_path(__DIR__) . '/assets/fonts');
         $dh = opendir($dir);
         if ($dh) {
             while(false !== ($file = readdir($dh))) {
@@ -79,7 +79,7 @@ class Sumedia_GFont_Reload_Fontlist
                     continue;
                 }
                 $fontfamily = $file;
-                $dh2 = opendir($dir . '/' . $file);
+                $dh2 = opendir($dir . Suma\DS . $file);
                 if ($dh2) {
                     while(false !== ($file2 = readdir($dh2))) {
                         if (substr($file2,-4) == '.css') {
@@ -107,8 +107,7 @@ class Sumedia_GFont_Reload_Fontlist
         foreach ($fonts as $fontdata) {
             list($fontfamily, $fontname) = array_values($fontdata);
 
-            $query = "INSERT IGNORE INTO  `" . $table_name . "` (`fontfamily`, `fontname`)
-                VALUES(%s, %s)";
+            $query = "INSERT IGNORE INTO  `" . $table_name . "` (`fontfamily`, `fontname`) VALUES(%s, %s)";
             $prepare = $wpdb->prepare($query, $fontfamily, $fontname);
             $wpdb->query($prepare);
         }
