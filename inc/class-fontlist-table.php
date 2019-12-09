@@ -8,7 +8,7 @@ class Sumedia_GFont_Fontlist_Table extends WP_List_Table
     {
         return array(
             'cb' => '<input type="checkbox" />',
-            'id' => __('ID'),
+            'id' => __('ID', 'sumedia-gfont'),
             'fontfamily' => __('Font Family', 'sumedia-gfont'),
             'fontname' => __('Font Name', 'sumedia-gfont'),
             'use_flag' => __('Use this font', 'sumedia-gfont')

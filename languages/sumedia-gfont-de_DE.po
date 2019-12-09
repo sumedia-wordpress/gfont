@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Sumedia Google Fonts\n"
-"POT-Creation-Date: 2019-12-08 21:53+0100\n"
-"PO-Revision-Date: 2019-12-08 21:56+0100\n"
+"Project-Id-Version: sumedia-gfont\n"
+"POT-Creation-Date: 2019-12-09 06:13+0100\n"
+"PO-Revision-Date: 2019-12-09 06:13+0100\n"
 "Last-Translator: Sven Ullmann <kontakt@sumedia-webdesign.de>\n"
 "Language-Team: Sven Ullmann <kontakt@sumedia-webdesign.de>\n"
 "Language: de_DE\n"
@@ -20,6 +20,7 @@ msgstr ""
 "_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
 
 #: inc/class-fontlist-table.php:11
 msgid "ID"
@@ -45,25 +46,14 @@ msgstr "Ja"
 msgid "No"
 msgstr "Nein"
 
-#: inc/class-plugin.php:37 admin/templates/plugin.phtml:10
+#: inc/class-plugin.php:24 admin/templates/config.phtml:16
+#: admin/templates/plugin.phtml:10
 msgid "Google Fonts"
 msgstr ""
 
-#: inc/class-plugin.php:38 admin/templates/plugin.phtml:22
+#: inc/class-plugin.php:25 admin/templates/plugin.phtml:22
 msgid "Configuration"
 msgstr "Konfiguration"
-
-#: sumedia-gfont.php:52
-msgid ""
-"In order to use Sumedia Plugins you need to install Sumedia Base Plugin "
-"(sumedia-base)."
-msgstr ""
-"Um Sumedia Plugins zu verwenden benötigen Sie das Sumedia Base Plugin "
-"(sumedia-base)"
-
-#: admin/templates/config.phtml:16
-msgid "Google Fonts Configuration"
-msgstr "Google Fonts Konfiguration"
 
 #: admin/templates/config.phtml:21
 msgid "Initialize/Reload Font Database"
@@ -73,16 +63,20 @@ msgstr "Initialisiere Font Datenbank"
 msgid "Use Google Fonts"
 msgstr "Verwende Google Fonts"
 
+#: admin/templates/config.phtml:29
+msgid "Search"
+msgstr ""
+
 #: admin/templates/plugin.phtml:16
 msgid ""
-"This Plugin provide a selection of Googles Font Library with Open Font "
+"This plugin provide a selection of the Google Fonts Library with Open Font "
 "licenced fonts."
 msgstr ""
-"Dieses Plugin stellt eine Kollektion aus der Google Fonts Bilbliothek "
-"unter der Open Font Lizenz zur Vergügung."
+"Dieses Plugin stellt eine Kollektion aus der Google Fonts Bilbliothek unter "
+"der Open Font Lizenz zur Verfügung."
 
 #. Plugin Name of the plugin/theme
-msgid "Sumedia Google Fonts"
+msgid "sumedia-gfont"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
@@ -100,3 +94,13 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://www.sumedia-webdesign.de"
 msgstr ""
+
+#~ msgid ""
+#~ "In order to use Sumedia Plugins you need to install Sumedia Base Plugin "
+#~ "(sumedia-base)."
+#~ msgstr ""
+#~ "Um Sumedia Plugins zu verwenden benötigen Sie das Sumedia Base Plugin "
+#~ "(sumedia-base)"
+
+#~ msgid "Google Fonts Configuration"
+#~ msgstr "Google Fonts Konfiguration"

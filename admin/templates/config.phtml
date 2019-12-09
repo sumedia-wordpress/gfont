@@ -13,7 +13,7 @@ $fontlist_table = new Sumedia_GFont_Fontlist_Table();
     <div class="suma-content">
         <div class="suma-heading">
             <img src="<?php echo SUMEDIA_PLUGIN_URL . 'sumedia-base/assets/images/kolibri-logo.png'; ?>" alt="Sumedia" />
-            <h1><?php echo __('Google Fonts Configuration', 'sumedia-gfont'); ?></h1>
+            <h1><?php echo __('Google Fonts', 'sumedia-gfont'); ?></h1>
         </div>
     </div>
     <div class="suma-content">
@@ -26,7 +26,7 @@ $fontlist_table = new Sumedia_GFont_Fontlist_Table();
             <h2><?php echo __('Use Google Fonts', 'sumedia-gfont'); ?></h2>
             <?php
                 $fontlist_table->prepare_items();
-                $fontlist_table->search_box(__('Search'), 'search');
+                $fontlist_table->search_box(__('Search', 'sumedia-gfont'), 'search');
                 $fontlist_table->display();
             ?>
         </form>

@@ -8,7 +8,7 @@
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3 or higher
  *
  * @wordpress-plugin
- * Plugin Name: Sumedia GFont
+ * Plugin Name: sumedia-gfont
  * Plugin URI:  https://github.com/sumedia-wordpress/gfont
  * Description: Use Google Fonts with non-tracking data privacy
  * Version:     0.1.1
@@ -16,7 +16,7 @@
  * Rewrires PHP: 5.6.0 (not tested, could work)
  * Author:      Sven Ullmann
  * Author URI:  https://www.sumedia-webdesign.de
- * License:     GPL v3
+ * License:     GPL-3.0-or-later
  * Text Domain: sumedia-gfont
  * Domain Path: /languages/
  * Bug Reporting: https://github.com/sumedia-wordpress/gfont/issues
