@@ -81,21 +81,29 @@ class Sumedia_GFont_Fontlist_Table extends WP_List_Table
             $sortable
         );
 
-        $table_name = $wpdb->prefix . $this->_table_name;
-        $query = "SELECT * FROM `" . $table_name . "`";
-        $this->items = $wpdb->get_results($query, ARRAY_A);
-
-        usort($this->items, function($a, $b){
-            $orderby = isset($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'fontfamily';
-            $order = isset($_REQUEST['order']) && $_REQUEST['order'] == 'DESC' ? 'DESC' : 'ASC';
-            $result = strcmp($a[$orderby], $b[$orderby]);
-            return ($order === 'ASC' ? $result : -$result);
-        });
-
-        $per_page = 25;
+        $per_page = 20;
         $current_page = $this->get_pagenum();
-        $total_items = count($this->items);
-        $this->items = array_slice($this->items, (($current_page-1) * $per_page), $per_page);
+
+        $table_name = $wpdb->prefix . $this->_table_name;
+        $query = "SELECT COUNT(`id`) AS item_count FROM `" . $table_name . "`";
+        $row = $wpdb->get_row($query, ARRAY_A);
+        $total_items = $row['item_count'];
+        
+        $query = "SELECT * FROM `" . $table_name . "`";
+        if (isset($_REQUEST['s'])) {
+            $s = $_REQUEST['s'];
+            $query .= " WHERE `fontfamily` LIKE \"" . $wpdb->_real_escape('%' . $s . '%') . "\"";
+            $query .= " OR `fontname` LIKE \"" . $wpdb->_real_escape('%' . $s . '%') . "\"";
+        }
+        if (isset($_REQUEST['orderby'])) {
+            $query .= " ORDER BY " . $wpdb->_real_escape($_REQUEST['orderby']);
+        }
+        if (isset($_REQUEST['order'])) {
+            $query .= " " . ($_REQUEST['order'] == 'desc' ? 'DESC' : 'ASC');
+        }
+        $query .= " LIMIT " . $per_page . " OFFSET " . (((int) $current_page-1) * $per_page);
+
+        $this->items = $wpdb->get_results($query, ARRAY_A);
 
         $this->set_pagination_args(array(
             'total_items' => $total_items,
