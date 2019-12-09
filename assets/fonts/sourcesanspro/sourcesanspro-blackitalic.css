@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'sourcesanspro-blackitalic';
+  src: url('sourcesanspro-blackitalic.eot');
+  src: url('sourcesanspro-blackitalic.eot?#iefix') format('embedded-opentype'),
+  url('sourcesanspro-blackitalic.woff2') format('woff2'),
+  url('sourcesanspro-bloackitalic.woff') format('woff'),
+  url('sourcesanspro-bloackitalic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+}
+
+.sourcesanspro-blackitalic {
+  font-family:"sourcesanspro-blackitalic", sans-serif;
+}

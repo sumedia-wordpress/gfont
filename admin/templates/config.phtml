@@ -26,6 +26,7 @@ $fontlist_table = new Sumedia_GFont_Fontlist_Table();
             <h2><?php echo __('Use Google Fonts', 'sumedia-gfont'); ?></h2>
             <?php
                 $fontlist_table->prepare_items();
+                $fontlist_table->search_box(__('Search'), 'search');
                 $fontlist_table->display();
             ?>
         </form>
