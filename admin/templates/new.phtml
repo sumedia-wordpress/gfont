@@ -1,0 +1,48 @@
+<?php
+
+if (!defined('SUMEDIA_BASE_VERSION')) {
+    header( 'Status: 403 Forbidden' );
+    header( 'HTTP/1.1 403 Forbidden' );
+    exit();
+}
+
+?>
+<div class="suma-content">
+    <form class="suma-form" name="suma-gfont-new-form" action="<?php echo admin_url('admin.php?page=sumedia&plugin=' . SUMEDIA_GFONT_PLUGIN_NAME . '&action=new'); ?>" method="post">
+        <input type="hidden" name="_wpnonce" value="<?php echo wp_create_nonce(); ?>" />
+        <fieldset>
+            <legend><h1 class="wp-heading-inline"><?php echo __('Create new', SUMEDIA_GFONT_PLUGIN_NAME); ?></h1></legend>
+            <div class="suma-form-option">
+                <div class="suma-form-label">
+                    <label><?php echo esc_html(__('Google Font Url'), SUMEDIA_GFONT_PLUGIN_NAME); ?>:</label>
+                </div>
+                <div class="suma-form-input">
+                    <input type="text" size="64" name="google_url" />
+                </div>
+            </div>
+            <div class="suma-form-option">
+                <div class="suma-form-label">
+                    <label><?php echo esc_html(__('Font Name (CSS)'), SUMEDIA_GFONT_PLUGIN_NAME); ?>:</label>
+                </div>
+                <div class="suma-form-input">
+                    <input type="text" size="26" name="font_name" />
+                </div>
+            </div>
+        </fieldset>
+        <div class="suma-form-actions">
+            <input type="submit" class="button" value="<?php echo esc_attr(__('Create now', SUMEDIA_GFONT_PLUGIN_NAME)); ?>" />
+        </div>
+    </form>
+</div>
+<div class="suma-content">
+    <h1><?php echo __('Add a new Font from Google'); ?></h1>
+    <p>
+        <?php
+            echo sprintf(__('Navigate to Google fonts and select and modify the font you wish.<br />
+                Copy the <strong>URL from the Google Font embed code</strong> and paste it into "Google Font URL" in Wordpress.<br />
+                Give the font a name, it should be something like <strong>"roboto-light"</strong> eg.<br />
+                <strong>IMPORTANT</strong>: Please only one font per fontname, not a collection.<br />
+                <br />%s', SUMEDIA_GFONT_PLUGIN_NAME), '<img src="' . SUMEDIA_PLUGIN_URL . SUMEDIA_GFONT_PLUGIN_NAME . '/assets/images/font-screen.png" alt="Screenshot" />');
+        ?>
+    </p>
+</div>

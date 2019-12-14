@@ -4,75 +4,82 @@ class Sumedia_GFont_Plugin
 {
     public function init()
     {
-        $this->view();
-        $this->post_use_flags();
-        $this->post_reload_fonts();
+        $this->textdomain();
+        $this->plugin_view();
+        $this->controller();
+        $this->enqueue_styles();
     }
 
-    public function view()
+    public function install()
     {
-        $view = Sumedia_Base_Registry::get_instance('view');
-        $plugins = $view->get('sumedia_base_admin_view_plugins');
-        $plugins->plugins[SUMEDIA_GFONT_PLUGIN_NAME] = [
+        $installer = new Sumedia_GFont_Db_Installer;
+        $installer->install();
+    }
+
+    function textdomain()
+    {
+        load_plugin_textdomain(
+            SUMEDIA_GFONT_PLUGIN_NAME,
+            false,
+            SUMEDIA_GFONT_PLUGIN_NAME . DIRECTORY_SEPARATOR . 'languages'
+        );
+    }
+
+    public function plugin_view()
+    {
+        $plugins = Sumedia_Base_Registry_View::get('Sumedia_Base_Admin_View_Plugins');
+        $plugins->add_plugin(SUMEDIA_GFONT_PLUGIN_NAME, [
+            'name' => 'Google Fonts',
+            'version' => SUMEDIA_GFONT_VERSION,
+            'options' => [
+                [
+                    'name' => __('Fontlist', SUMEDIA_GFONT_PLUGIN_NAME),
+                    'url' => admin_url('admin.php?page=sumedia&plugin=' . SUMEDIA_GFONT_PLUGIN_NAME . '&action=fontlist')
+                ],
+                [
+                    'name' => __('Create new', SUMEDIA_GFONT_PLUGIN_NAME),
+                    'url' => admin_url('admin.php?page=sumedia&plugin=' . SUMEDIA_GFONT_PLUGIN_NAME . '&action=new')
+                ]
+            ],
             'description_template' => Suma\ds(SUMEDIA_PLUGIN_PATH . SUMEDIA_GFONT_PLUGIN_NAME . '/admin/templates/plugin.phtml')
-        ];
+        ]);
+    }
 
-        if (isset($_REQUEST['page']) && $_REQUEST['page'] == 'sumedia' && isset($_REQUEST['plugin']) && $_REQUEST['plugin'] == 'gfont') {
-            $view->get('sumedia_base_admin_view_menu')->template = Suma\ds(SUMEDIA_PLUGIN_PATH . SUMEDIA_GFONT_PLUGIN_NAME . '/admin/templates/config.phtml');
+    public function controller()
+    {
+        if (isset($_GET['page']) && isset($_GET['plugin']) && isset($_GET['action'])) {
+            if ($_GET['page'] == 'sumedia' && $_GET['plugin'] == SUMEDIA_GFONT_PLUGIN_NAME)
+            {
+                if ($_GET['action'] == 'fontlist') {
+                    $controller = Sumedia_GFont_Admin_Controller_Fontlist::get_instance();
+                } elseif ($_GET['action'] == 'new') {
+                    $controller = Sumedia_GFont_Admin_Controller_New::get_instance();
+                } elseif ($_POST['action'] == 'delete') {
+                    $controller = Sumedia_GFont_Admin_Controller_Delete::get_instance();
+                }
 
-            $heading = $view->get('sumedia_base_admin_view_heading');
-            $heading->title = __('Google Fonts');
-            $heading->side_title = __('Configuration');
-            $heading->version = SUMEDIA_GFONT_VERSION;
+                if (isset($controller)) {
+                    add_action('admin_init', [$controller, 'prepare']);
+                    add_action('admin_init', [$controller, 'execute']);
+                }
+            }
         }
+    }
 
-        $event = new Sumedia_Base_Event(function(){
+    public function enqueue_styles()
+    {
+        add_action('wp_enqueue_scripts', function(){
             global $wpdb;
             $table_name = $wpdb->prefix . 'sumedia_gfont_fonts';
 
-            $query = "SELECT `fontfamily`, `fontname` FROM `" . $table_name . "` WHERE `use_flag` = 1";
+            $query = "SELECT `fontname` FROM `" . $table_name . "` WHERE `use_flag` = 1";
             $results = $wpdb->get_results($query, ARRAY_A);
             if ($results) {
                 foreach ($results as $fontdata) {
-                    $cssFile = SUMEDIA_PLUGIN_URL . SUMEDIA_GFONT_PLUGIN_NAME . '/assets/fonts/' . $fontdata['fontfamily'] . '/' . $fontdata['fontname'] . '.css';
-                    wp_enqueue_style('suma_gfont_' . $fontdata['fontfamily'] . '.' . $fontdata['fontname'], $cssFile);
+                    $cssFile = SUMEDIA_PLUGIN_URL . SUMEDIA_GFONT_PLUGIN_NAME . '/data/webfonts/' . $fontdata['fontname'] . '/' . $fontdata['fontname'] . '.css';
+                    wp_enqueue_style('suma_gfont_' . $fontdata['fontname'], $cssFile);
                 }
             }
         });
-        add_action('wp_enqueue_scripts', [$event, 'execute']);
-    }
-
-    public function post_use_flags()
-    {
-        if (isset($_GET['plugin']) && $_GET['plugin'] == 'gfont'
-            && isset($_POST['action']) && $_POST['action'] == 'use_flag'
-        ) {
-            if (wp_verify_nonce($_POST['_wpnonce'], 'bulk-plugins_page_sumedia')) {
-                $form = new Sumedia_GFont_Fontlist_Form();
-                $form->load();
-                $form->do_request($_POST);
-                $form->save();
-            }
-            $event = new Sumedia_Base_Event(function() {
-                wp_redirect(admin_url('admin.php?page=sumedia&plugin=gfont'));
-            });
-            add_action('template_redirect', [$event, 'execute']);
-        }
-    }
-
-    public function post_reload_fonts()
-    {
-        if(isset($_GET['plugin']) && $_GET['plugin'] == 'gfont'
-                && isset($_GET['action']) && $_GET['action'] == 'reload_fonts') {
-            if (wp_verify_nonce($_GET['nonce'], 'sumedia-gfont-reload-fonts')) {
-                $reloader = new Sumedia_GFont_Reload_Fontlist();
-                $reloader->execute();
-            }
-            $event = new Sumedia_Base_Event(function() {
-                wp_redirect(admin_url('admin.php?page=sumedia&plugin=gfont'));
-            });
-            add_action('template_redirect', [$event, 'execute']);
-
-        }
     }
 }

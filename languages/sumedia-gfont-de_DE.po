@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sumedia-gfont\n"
-"POT-Creation-Date: 2019-12-09 06:13+0100\n"
-"PO-Revision-Date: 2019-12-09 06:13+0100\n"
+"POT-Creation-Date: 2019-12-14 03:09+0100\n"
+"PO-Revision-Date: 2019-12-14 03:13+0100\n"
 "Last-Translator: Sven Ullmann <kontakt@sumedia-webdesign.de>\n"
 "Language-Team: Sven Ullmann <kontakt@sumedia-webdesign.de>\n"
 "Language: de_DE\n"
@@ -22,52 +22,119 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 
-#: inc/class-fontlist-table.php:11
-msgid "ID"
-msgstr ""
+#: admin/controller/class-admin-controller-delete.php:41
+msgid "The font has been successfully removed."
+msgstr "Der Font wurde erfolgreich entfernt."
 
-#: inc/class-fontlist-table.php:12
-msgid "Font Family"
-msgstr ""
-
-#: inc/class-fontlist-table.php:13
-msgid "Font Name"
-msgstr ""
-
-#: inc/class-fontlist-table.php:14 inc/class-fontlist-table.php:64
-msgid "Use this font"
-msgstr "Font verwenden"
-
-#: inc/class-fontlist-table.php:55
-msgid "Yes"
-msgstr "Ja"
-
-#: inc/class-fontlist-table.php:57
-msgid "No"
-msgstr "Nein"
-
-#: inc/class-plugin.php:24 admin/templates/config.phtml:16
-#: admin/templates/plugin.phtml:10
+#: admin/controller/class-admin-controller-fontlist.php:16
+#: admin/controller/class-admin-controller-new.php:16
 msgid "Google Fonts"
-msgstr ""
+msgstr "Google Fonts"
 
-#: inc/class-plugin.php:25 admin/templates/plugin.phtml:22
+#: admin/controller/class-admin-controller-fontlist.php:17
 msgid "Configuration"
 msgstr "Konfiguration"
 
-#: admin/templates/config.phtml:21
-msgid "Initialize/Reload Font Database"
-msgstr "Initialisiere Font Datenbank"
+#: admin/controller/class-admin-controller-fontlist.php:21
+#: admin/controller/class-admin-controller-new.php:21
+msgid "Back to the plugin overview"
+msgstr "Zurück zur Plugin Übersicht"
 
-#: admin/templates/config.phtml:26
-msgid "Use Google Fonts"
-msgstr "Verwende Google Fonts"
+#: admin/controller/class-admin-controller-new.php:17 inc/class-plugin.php:40
+#: admin/templates/fontlist.phtml:14 admin/templates/new.phtml:14
+msgid "Create new"
+msgstr "Neu erstellen"
 
-#: admin/templates/config.phtml:29
-msgid "Search"
+#: admin/controller/class-admin-controller-new.php:25
+msgid "Back to the google fontlist"
+msgstr "Zurück zur Google Fontliste"
+
+#: admin/controller/class-admin-controller-new.php:40
+msgid "The font has been fetched from google."
+msgstr "Der Font wurde von Google geholt."
+
+#: admin/form/class-admin-form-new.php:15
+msgid "The form could not be verified, please try again"
 msgstr ""
+"Das Formular konnte nicht verifiziert werden, bitte versuchen Sie es erneut"
 
-#: admin/templates/plugin.phtml:16
+#: admin/form/class-admin-form-new.php:20
+#: admin/form/class-admin-form-new.php:30
+#, php-format
+msgid "Missing parameter: %s."
+msgstr "Fehler Parameter: %s."
+
+#: admin/form/class-admin-form-new.php:25
+msgid "The given Google URL seems not to be valid."
+msgstr "Die angegebene Google-URL scheint ungültig zu sein."
+
+#: admin/form/class-admin-form-new.php:35
+msgid "Invalid Font Name"
+msgstr "Ungültiger Schriftname"
+
+#: admin/table/class-admin-table-fontlist.php:11
+msgid "ID"
+msgstr "ID"
+
+#: admin/table/class-admin-table-fontlist.php:12
+msgid "Google URL"
+msgstr "Google URL"
+
+#: admin/table/class-admin-table-fontlist.php:13
+msgid "Font Name"
+msgstr "Schriftname"
+
+#: admin/table/class-admin-table-fontlist.php:49
+msgid "Delete"
+msgstr "Löschen"
+
+#: inc/class-plugin.php:36 admin/templates/fontlist.phtml:13
+msgid "Fontlist"
+msgstr "Fontliste"
+
+#: admin/templates/fontlist.phtml:18
+msgid "Search"
+msgstr "Suche"
+
+#: admin/templates/new.phtml:17
+msgid "Google Font Url"
+msgstr "Google Font URL"
+
+#: admin/templates/new.phtml:25
+msgid "Font Name (CSS)"
+msgstr "Font Name (CSS)"
+
+#: admin/templates/new.phtml:33
+msgid "Create now"
+msgstr "Jetzt anlegen"
+
+#: admin/templates/new.phtml:38
+msgid "Add a new Font from Google"
+msgstr "Einen neuen Font von Google hinzufügen"
+
+#: admin/templates/new.phtml:41
+#, php-format
+msgid ""
+"Navigate to Google fonts and select and modify the font you wish.<br />\n"
+"                Copy the <strong>URL from the Google Font embed code</"
+"strong> and paste it into \"Google Font URL\" in Wordpress.<br />\n"
+"                Give the font a name, it should be something like <strong>"
+"\"roboto-light\"</strong> eg.<br />\n"
+"                <strong>IMPORTANT</strong>: Please only one font per "
+"fontname, not a collection.<br />\n"
+"                <br />%s"
+msgstr ""
+"Navigieren Sie zu Google-Schriftarten, und wählen Sie die gewünschten "
+"Schriftarten aus und passen Sie sie ggfs. an.<br>Kopieren Sie die "
+"<strong>URL aus dem Google Font-Einbettungscode</strong> und fügen Sie sie "
+"in Wordpress in \"Google Font URL\" ein.<br>Geben Sie der Schrift einen "
+"Namen, es sollte so etwas wie <strong>\"roboto-light\"</strong> z.B. sein."
+"<br>\n"
+"                <strong>WICHTIG</strong>: Bitte nur eine Schriftart pro "
+"Font Name, keine Sammlung.<br>\n"
+"                <br>%s"
+
+#: admin/templates/plugin.phtml:12
 msgid ""
 "This plugin provide a selection of the Google Fonts Library with Open Font "
 "licenced fonts."
@@ -77,11 +144,11 @@ msgstr ""
 
 #. Plugin Name of the plugin/theme
 msgid "sumedia-gfont"
-msgstr ""
+msgstr "sumedia-gfont"
 
 #. Plugin URI of the plugin/theme
 msgid "https://github.com/sumedia-wordpress/gfont"
-msgstr ""
+msgstr "https://github.com/sumedia-wordpress/gfont"
 
 #. Description of the plugin/theme
 msgid "Use Google Fonts with non-tracking data privacy"
@@ -89,11 +156,23 @@ msgstr "Verwende Google Fonts ohne Tracking um den Datenschutz zu wahren"
 
 #. Author of the plugin/theme
 msgid "Sven Ullmann"
-msgstr ""
+msgstr "Sven Ullmann"
 
 #. Author URI of the plugin/theme
 msgid "https://www.sumedia-webdesign.de"
-msgstr ""
+msgstr "https://www.sumedia-webdesign.de"
+
+#~ msgid "Use this font"
+#~ msgstr "Font verwenden"
+
+#~ msgid "Yes"
+#~ msgstr "Ja"
+
+#~ msgid "No"
+#~ msgstr "Nein"
+
+#~ msgid "Initialize/Reload Font Database"
+#~ msgstr "Initialisiere Font Datenbank"
 
 #~ msgid ""
 #~ "In order to use Sumedia Plugins you need to install Sumedia Base Plugin "

@@ -11,7 +11,7 @@
  * Plugin Name: sumedia-gfont
  * Plugin URI:  https://github.com/sumedia-wordpress/gfont
  * Description: Use Google Fonts with non-tracking data privacy
- * Version:     0.1.1
+ * Version:     0.2.0
  * Requires at least: 5.3 (nothing else tested yet)
  * Rewrires PHP: 5.6.0 (not tested, could work)
  * Author:      Sven Ullmann
@@ -44,33 +44,23 @@ if (!function_exists( 'add_filter')) {
     exit();
 }
 
-require_once(__DIR__ . str_replace('/', DIRECTORY_SEPARATOR, '/vendor/autoload.php'));
+require_once(__DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php');
 require_once(__DIR__ . DIRECTORY_SEPARATOR . 'sumedia-base.php');
 
-define('SUMEDIA_GFONT_VERSION', '0.1.1');
-define('SUMEDIA_GFONT_PLUGIN_NAME', dirname(plugin_basename(__FILE__)));
+if (defined('SUMEDIA_BASE_VERSION')) {
 
-require_once(__DIR__ . str_replace('/', DIRECTORY_SEPARATOR, '/inc/class-installer.php'));
-$installer = new Sumedia_GFont_Installer;
-register_activation_hook(__FILE__, [$installer, 'install']);
+    define('SUMEDIA_GFONT_VERSION', '0.2.0');
+    define('SUMEDIA_GFONT_PLUGIN_NAME', dirname(plugin_basename(__FILE__)));
 
-add_action('plugins_loaded', 'sumedia_gfont_textdomain');
-function sumedia_gfont_textdomain()
-{
-    load_plugin_textdomain(
-        'sumedia-gfont',
-        false,
-        SUMEDIA_GFONT_PLUGIN_NAME . DIRECTORY_SEPARATOR . 'languages');
-}
+    $autoloader = Sumedia_Base_Autoloader::get_instance();
+    $autoloader->register_autoload_dir(SUMEDIA_GFONT_PLUGIN_NAME, 'inc');
+    $autoloader->register_autoload_dir(SUMEDIA_GFONT_PLUGIN_NAME, 'admin' . Suma\DS . 'view');
+    $autoloader->register_autoload_dir(SUMEDIA_GFONT_PLUGIN_NAME, 'admin' . Suma\DS . 'form');
+    $autoloader->register_autoload_dir(SUMEDIA_GFONT_PLUGIN_NAME, 'admin' . Suma\DS . 'table');
+    $autoloader->register_autoload_dir(SUMEDIA_GFONT_PLUGIN_NAME, 'admin' . Suma\DS . 'controller');
 
-add_action('init', 'sumedia_gfont_init', 10);
-function sumedia_gfont_init()
-{
-    if (defined('SUMEDIA_BASE_VERSION')) {
-        $autoloader = Sumedia_Base_Autoloader::get_instance();
-        $autoloader->register_autoload_dir(SUMEDIA_GFONT_PLUGIN_NAME, 'inc');
-
-        $plugin = new Sumedia_GFont_Plugin();
-        $plugin->init();
-    }
+    $plugin = new Sumedia_GFont_Plugin();
+    register_activation_hook(__FILE__, [$plugin, 'install']);
+    add_action('upgrader_process_complete', [$plugin, 'install']);
+    add_action('plugins_loaded', [$plugin, 'init'], 10);
 }
