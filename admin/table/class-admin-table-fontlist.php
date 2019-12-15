@@ -50,8 +50,6 @@ class Sumedia_GFont_Admin_Table_Fontlist extends WP_List_Table
         );
     }
 
-
-
     function prepare_items()
     {
         global $wpdb;
@@ -76,9 +74,10 @@ class Sumedia_GFont_Admin_Table_Fontlist extends WP_List_Table
         
         $query = "SELECT * FROM `" . $table_name . "`";
         if (isset($_REQUEST['s'])) {
-            $s = $_REQUEST['s'];
-            $query .= " WHERE `fontfamily` LIKE \"" . $wpdb->_real_escape('%' . $s . '%') . "\"";
+            $s = $_REQUEST['s']; // escaped in next two lines
+            $query .= " WHERE `google_url` LIKE \"" . $wpdb->_real_escape('%' . $s . '%') . "\"";
             $query .= " OR `fontname` LIKE \"" . $wpdb->_real_escape('%' . $s . '%') . "\"";
+            unset($s); // so now one will use anymore unescaped var
         }
         if (isset($_REQUEST['orderby'])) {
             $query .= " ORDER BY " . $wpdb->_real_escape($_REQUEST['orderby']);

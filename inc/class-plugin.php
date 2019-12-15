@@ -50,12 +50,12 @@ class Sumedia_GFont_Plugin
         if (isset($_GET['page']) && isset($_GET['plugin']) && isset($_GET['action'])) {
             if ($_GET['page'] == 'sumedia' && $_GET['plugin'] == SUMEDIA_GFONT_PLUGIN_NAME)
             {
-                if ($_GET['action'] == 'fontlist') {
+                if (isset($_POST['action']) && $_POST['action'] == 'delete') {
+                    $controller = Sumedia_Base_Registry::get('Sumedia_GFont_Admin_Controller_Delete');
+                } elseif ($_GET['action'] == 'fontlist') {
                     $controller = Sumedia_Base_Registry::get('Sumedia_GFont_Admin_Controller_Fontlist');
                 } elseif ($_GET['action'] == 'new') {
                     $controller = Sumedia_Base_Registry::get('Sumedia_GFont_Admin_Controller_New');
-                } elseif ($_POST['action'] == 'delete') {
-                    $controller = Sumedia_Base_Registry::get('Sumedia_GFont_Admin_Controller_Delete');
                 }
 
                 if (isset($controller)) {
@@ -76,7 +76,8 @@ class Sumedia_GFont_Plugin
             $results = $wpdb->get_results($query, ARRAY_A);
             if ($results) {
                 foreach ($results as $fontdata) {
-                    $cssFile = SUMEDIA_PLUGIN_URL . SUMEDIA_GFONT_PLUGIN_NAME . '/data/webfonts/' . $fontdata['fontname'] . '/' . $fontdata['fontname'] . '.css';
+                    $baseurl = wp_get_upload_dir()['baseurl'];
+                    $cssFile = $baseurl . '/' . SUMEDIA_GFONT_PLUGIN_NAME . '/webfonts/' . $fontdata['fontname'] . '/' . $fontdata['fontname'] . '.css';
                     wp_enqueue_style('suma_gfont_' . $fontdata['fontname'], $cssFile);
                 }
             }

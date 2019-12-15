@@ -12,11 +12,18 @@ $fontlist_table = Sumedia_Base_Registry::get('Sumedia_GFont_Admin_Table_Fontlist
 <div class="suma-content">
     <h1 class="wp-heading-inline"><?php echo __('Fontlist', SUMEDIA_GFONT_PLUGIN_NAME); ?></h1>
     <a href="<?php echo admin_url('admin.php?page=sumedia&plugin=' . SUMEDIA_GFONT_PLUGIN_NAME . '&action=new'); ?>" class="page-title-action"><?php echo __('Create new', SUMEDIA_GFONT_PLUGIN_NAME); ?></a>
-    <form class="suma-form" name="suma-gfont-fontlist-form" action="<?php echo admin_url('admin.php?page=sumedia&plugin=' . SUMEDIA_GFONT_PLUGIN_NAME . '&action=useflag'); ?>" method="post">
+    <form class="suma-form" name="suma-gfont-fontlist-form" action="<?php echo admin_url('admin.php?page=sumedia&plugin=' . SUMEDIA_GFONT_PLUGIN_NAME . '&action=fontlist'); ?>" method="post">
         <?php
             $fontlist_table->prepare_items();
             $fontlist_table->search_box(__('Search', SUMEDIA_GFONT_PLUGIN_NAME), 'search');
             $fontlist_table->display();
         ?>
     </form>
+</div>
+
+<div class="suma-content">
+    <h1><?php echo __('Integrate in your theme', SUMEDIA_GFONT_PLUGIN_NAME); ?></h1>
+    <p><?php echo __('If you want to use the new font have a look at the upper table where is defined HTML class: your-font-name.', SUMEDIA_GFONT_PLUGIN_NAME); ?></p>
+    <p><?php echo __('You can add this class to your editor in order to display the text in this font.', SUMEDIA_GFONT_PLUGIN_NAME); ?></p>
+    <img src="<?php echo SUMEDIA_PLUGIN_URL . '/' . SUMEDIA_GFONT_PLUGIN_NAME . '/assets/images/css-class-howto.png'; ?>" alt="CSS Class Howto" />
 </div>

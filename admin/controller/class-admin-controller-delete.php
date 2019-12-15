@@ -10,6 +10,7 @@ class Sumedia_GFont_Admin_Controller_Delete extends Sumedia_Base_Controller
 
         $fonts = Sumedia_Base_Registry::get('Sumedia_GFont_Repository_Fonts');
         foreach ($_POST['ids'] as $id) {
+
             if(!is_numeric($id)) {
                 continue;
             }
@@ -21,7 +22,8 @@ class Sumedia_GFont_Admin_Controller_Delete extends Sumedia_Base_Controller
 
             $font_name = $data['fontname'];
 
-            $dir = SUMEDIA_PLUGIN_PATH . SUMEDIA_GFONT_PLUGIN_NAME . '/data/webfonts/' . $font_name;
+            $font_dir = wp_get_upload_dir()['basedir'] . Suma\DS . SUMEDIA_GFONT_PLUGIN_NAME;
+            $dir = $font_dir . Suma\DS . 'webfonts' . Suma\DS . $font_name;
             $filelist = glob($dir.'/*');
             foreach ($filelist as $file) {
                 unlink($file);

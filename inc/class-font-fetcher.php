@@ -4,18 +4,39 @@ class Sumedia_GFont_Font_Fetcher
 {
     protected $font_dir;
 
-    protected $font_name;
-
     public function __construct()
     {
-        $this->font_dir = SUMEDIA_PLUGIN_PATH . SUMEDIA_GFONT_PLUGIN_NAME . Suma\ds('/data');
+        $this->font_dir = wp_get_upload_dir()['basedir'] . Suma\DS . SUMEDIA_GFONT_PLUGIN_NAME;
         if (!file_exists($this->font_dir)) {
             mkdir($this->font_dir, 0777, true);
         }
     }
 
+    /**
+     * Only Google Domain is allowed in order to not get bad files
+     *
+     * @param string $url
+     * @return bool
+     */
+    public function is_valid_url($url)
+    {
+        $parsed = parse_url($url);
+        if (!isset($parsed['host']) || $parsed['host'] != 'fonts.googleapis.com') {
+            return false;
+        }
+        if (!isset($parsed['query']) || empty($parsed['query'])) {
+            return false;
+        }
+        return true;
+    }
+
     public function fetch($google_url, $font_name)
     {
+        // only allow right domain from google
+        if (!$this->is_valid_url($google_url)) {
+            return;
+        }
+
         $css_styles = $this->fetch_styles($google_url);
 
         $files = array_merge(
@@ -34,6 +55,7 @@ class Sumedia_GFont_Font_Fetcher
             copy($file, $dir . Suma\DS . $font_name . '.' . $ext);
         }
 
+        // generated local content, no extern or input involved
         $css_content = $this->get_css_content($font_name, $css_styles);
 
         file_put_contents($dir . '/' . $font_name . '.css', $css_content);
@@ -41,8 +63,16 @@ class Sumedia_GFont_Font_Fetcher
 
     public function fetch_styles($google_url)
     {
-        $content = file_get_contents($google_url);
-        if (!preg_match_all('#^ +(.*?):(.*?);$#ims', $content, $matches)) {
+        // only allow right domain from google
+        if (!$this->is_valid_url($google_url)){
+            return;
+        }
+
+        $content = wp_remote_get($google_url);
+        if (!isset($content['body']) || empty($content['body'])) {
+            return;
+        }
+        if (!preg_match_all('#^ +(.*?):(.*?);$#ims', $content['body'], $matches)) {
             return;
         }
 
@@ -51,20 +81,22 @@ class Sumedia_GFont_Font_Fetcher
 
     public function fetch_webfont_urls($google_url, $useragent)
     {
+        // only allow right domain from google
+        if (!$this->is_valid_url($google_url)){
+            return;
+        }
+
         $files = [];
 
-        $curl = curl_init($google_url);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_USERAGENT, $useragent);
-        curl_setopt($curl, CURLOPT_HTTPGET, 1);
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($curl, CURLOPT_REFERER, '');
-        curl_setopt($curl, CURLOPT_COOKIEJAR, 'cookie.txt');
-        $content = curl_exec($curl);
+        $content = wp_remote_get($google_url,[
+            'user-agent' => $useragent
+        ]);
 
-        if (!preg_match_all('#url\((.*?)\)#ims', $content, $matches)) {
+        if (!isset($content['body']) || empty($content['body'])) {
+            return;
+        }
+
+        if (!preg_match_all('#url\((.*?)\)#ims', $content['body'], $matches)) {
             return;
         }
 
@@ -77,7 +109,6 @@ class Sumedia_GFont_Font_Fetcher
 
     public function get_css_content($font_name, $css_styles)
     {
-        $dir = $this->font_dir . Suma\ds('/webfonts/' . $font_name);
         $style = '@font-face {';
         foreach ($css_styles as $key => $value) {
             if ('src' == $key) {
@@ -89,11 +120,12 @@ class Sumedia_GFont_Font_Fetcher
                 $style .= $key . ':' . trim($value) . ';';
             }
         }
-        $font_path = SUMEDIA_PLUGIN_URL . SUMEDIA_GFONT_PLUGIN_NAME . '/data/webfonts/' . $font_name . '/' . $font_name;
-        $style .= 'src: url(\'' . $font_path . '.eot?#iefix\') format(\'embedded-opentype\'),';
-        $style .= 'url(\'' . $font_path . '.woff\') format(\'woff\'),';
-        $style .= 'url(\'' . $font_path . '.woff2\') format(\'woff2\'),';
-        $style .= 'url(\'' . $font_path . '.ttf\')  format(\'truetype\');';
+
+        $font_url = wp_get_upload_dir()['baseurl'] . '/' . SUMEDIA_GFONT_PLUGIN_NAME . '/webfonts/' . $font_name . '/' . $font_name;
+        $style .= 'src: url(\'' . $font_url . '.eot?#iefix\') format(\'embedded-opentype\'),';
+        $style .= 'url(\'' . $font_url . '.woff\') format(\'woff\'),';
+        $style .= 'url(\'' . $font_url . '.woff2\') format(\'woff2\'),';
+        $style .= 'url(\'' . $font_url . '.ttf\')  format(\'truetype\');';
         $style .= '}';
         $style .= '.' . $font_name . ' { font-family: ' . $font_name . '; }';
 
