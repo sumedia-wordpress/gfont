@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sumedia-gfont\n"
-"POT-Creation-Date: 2019-12-14 03:09+0100\n"
-"PO-Revision-Date: 2019-12-14 03:13+0100\n"
+"POT-Creation-Date: 2019-12-15 15:05+0100\n"
+"PO-Revision-Date: 2019-12-15 15:06+0100\n"
 "Last-Translator: Sven Ullmann <kontakt@sumedia-webdesign.de>\n"
 "Language-Team: Sven Ullmann <kontakt@sumedia-webdesign.de>\n"
 "Language: de_DE\n"
@@ -16,40 +16,40 @@ msgstr ""
 "X-Poedit-WPHeader: sumedia-gfont.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
-"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 
-#: admin/controller/class-admin-controller-delete.php:41
+#: admin/controller/class-admin-controller-delete.php:35
 msgid "The font has been successfully removed."
 msgstr "Der Font wurde erfolgreich entfernt."
 
-#: admin/controller/class-admin-controller-fontlist.php:16
-#: admin/controller/class-admin-controller-new.php:16
+#: admin/controller/class-admin-controller-fontlist.php:11
+#: admin/controller/class-admin-controller-new.php:11
 msgid "Google Fonts"
 msgstr "Google Fonts"
 
-#: admin/controller/class-admin-controller-fontlist.php:17
+#: admin/controller/class-admin-controller-fontlist.php:12
 msgid "Configuration"
 msgstr "Konfiguration"
 
-#: admin/controller/class-admin-controller-fontlist.php:21
-#: admin/controller/class-admin-controller-new.php:21
+#: admin/controller/class-admin-controller-fontlist.php:16
+#: admin/controller/class-admin-controller-new.php:16
 msgid "Back to the plugin overview"
 msgstr "Zurück zur Plugin Übersicht"
 
-#: admin/controller/class-admin-controller-new.php:17 inc/class-plugin.php:40
+#: admin/controller/class-admin-controller-new.php:12 inc/class-plugin.php:40
 #: admin/templates/fontlist.phtml:14 admin/templates/new.phtml:14
 msgid "Create new"
 msgstr "Neu erstellen"
 
-#: admin/controller/class-admin-controller-new.php:25
+#: admin/controller/class-admin-controller-new.php:20
 msgid "Back to the google fontlist"
 msgstr "Zurück zur Google Fontliste"
 
-#: admin/controller/class-admin-controller-new.php:40
+#: admin/controller/class-admin-controller-new.php:35
 msgid "The font has been fetched from google."
 msgstr "Der Font wurde von Google geholt."
 
@@ -130,8 +130,8 @@ msgstr ""
 "in Wordpress in \"Google Font URL\" ein.<br>Geben Sie der Schrift einen "
 "Namen, es sollte so etwas wie <strong>\"roboto-light\"</strong> z.B. sein."
 "<br>\n"
-"                <strong>WICHTIG</strong>: Bitte nur eine Schriftart pro "
-"Font Name, keine Sammlung.<br>\n"
+"                <strong>WICHTIG</strong>: Bitte nur eine Schriftart pro Font "
+"Name, keine Sammlung.<br>\n"
 "                <br>%s"
 
 #: admin/templates/plugin.phtml:12
@@ -143,8 +143,8 @@ msgstr ""
 "der Open Font Lizenz zur Verfügung."
 
 #. Plugin Name of the plugin/theme
-msgid "sumedia-gfont"
-msgstr "sumedia-gfont"
+msgid "Sumedia GFont"
+msgstr "Sumedia GFont"
 
 #. Plugin URI of the plugin/theme
 msgid "https://github.com/sumedia-wordpress/gfont"

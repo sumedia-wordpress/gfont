@@ -3,11 +3,6 @@
 class Sumedia_GFont_Admin_Form_Fontlist extends Sumedia_Base_Form
 {
     /**
-     * @var $this
-     */
-    protected static $instance;
-
-    /**
      * @var array
      */
     protected $data = [];

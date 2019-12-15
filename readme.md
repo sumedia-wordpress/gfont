@@ -7,9 +7,7 @@ be transmitted.
 So why not use the explicitly free font on own host to
 protected visitors privacy.
 
-# Sumedia Google Fonts
-
-## Usage
+## Sumedia Google Fonts
 
 In the backend you can reload the font list
 to get the actually included fonts to the database.

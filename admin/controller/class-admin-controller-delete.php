@@ -2,19 +2,13 @@
 
 class Sumedia_GFont_Admin_Controller_Delete extends Sumedia_Base_Controller
 {
-    /**
-     * @var $this
-     */
-    protected static $instance;
-
     public function execute()
     {
-
         if (!wp_verify_nonce($_POST['_wpnonce'], 'bulk-plugins_page_sumedia')) {
             return;
         }
 
-        $fonts = Sumedia_GFont_Repository_Fonts::get_instance();
+        $fonts = Sumedia_Base_Registry::get('Sumedia_GFont_Repository_Fonts');
         foreach ($_POST['ids'] as $id) {
             if(!is_numeric($id)) {
                 continue;

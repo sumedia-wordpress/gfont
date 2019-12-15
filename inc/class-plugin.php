@@ -27,7 +27,7 @@ class Sumedia_GFont_Plugin
 
     public function plugin_view()
     {
-        $plugins = Sumedia_Base_Registry_View::get('Sumedia_Base_Admin_View_Plugins');
+        $plugins = Sumedia_Base_Registry::get('Sumedia_Base_Admin_View_Plugins');
         $plugins->add_plugin(SUMEDIA_GFONT_PLUGIN_NAME, [
             'name' => 'Google Fonts',
             'version' => SUMEDIA_GFONT_VERSION,
@@ -51,11 +51,11 @@ class Sumedia_GFont_Plugin
             if ($_GET['page'] == 'sumedia' && $_GET['plugin'] == SUMEDIA_GFONT_PLUGIN_NAME)
             {
                 if ($_GET['action'] == 'fontlist') {
-                    $controller = Sumedia_GFont_Admin_Controller_Fontlist::get_instance();
+                    $controller = Sumedia_Base_Registry::get('Sumedia_GFont_Admin_Controller_Fontlist');
                 } elseif ($_GET['action'] == 'new') {
-                    $controller = Sumedia_GFont_Admin_Controller_New::get_instance();
+                    $controller = Sumedia_Base_Registry::get('Sumedia_GFont_Admin_Controller_New');
                 } elseif ($_POST['action'] == 'delete') {
-                    $controller = Sumedia_GFont_Admin_Controller_Delete::get_instance();
+                    $controller = Sumedia_Base_Registry::get('Sumedia_GFont_Admin_Controller_Delete');
                 }
 
                 if (isset($controller)) {

@@ -6,7 +6,7 @@ if (!defined('SUMEDIA_BASE_VERSION')) {
     exit();
 }
 
-$fontlist_table = new Sumedia_GFont_Admin_Table_Fontlist();
+$fontlist_table = Sumedia_Base_Registry::get('Sumedia_GFont_Admin_Table_Fontlist');
 
 ?>
 <div class="suma-content">

@@ -3,11 +3,6 @@
 class Sumedia_GFont_Repository_Fonts extends Sumedia_Base_Repository
 {
     /**
-     * @var $this
-     */
-    protected static $instance;
-
-    /**
      * @return string
      */
     public function get_table_name()
