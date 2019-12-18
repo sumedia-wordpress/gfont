@@ -1,6 +1,10 @@
 <?php
 
-class Sumedia_GFont_Repository_Fonts extends Sumedia_Base_Repository
+namespace Sumedia\GFont\Repository;
+
+use Sumedia\GFont\Base\Repository;
+
+class Fonts extends Repository
 {
     /**
      * @return string

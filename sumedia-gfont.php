@@ -11,7 +11,7 @@
  * Plugin Name: Sumedia GFont
  * Plugin URI:  https://github.com/sumedia-wordpress/gfont
  * Description: Use Google Fonts with non-tracking data privacy
- * Version:     0.2.1
+ * Version:     0.3.0
  * Requires at least: 5.3 (nothing else tested yet)
  * Rewrires PHP: 5.6.0 (not tested, could work)
  * Author:      Sven Ullmann
@@ -38,29 +38,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if (!function_exists( 'add_filter')) {
+if (!defined('ABSPATH')) {
     header( 'Status: 403 Forbidden' );
     header( 'HTTP/1.1 403 Forbidden' );
     exit();
 }
 
-require_once(__DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php');
-require_once(__DIR__ . DIRECTORY_SEPARATOR . 'sumedia-base.php');
+define('SUMEDIA_GFONT_VERSION', '0.3.0');
+define('SUMEDIA_GFONT_PLUGIN_NAME', dirname(plugin_basename(__FILE__)));
+define('SUMEDIA_GFONT_PLUGIN_PATH', __DIR__);
+define('SUMEDIA_GFONT_PLUGIN_URL', plugin_dir_url(__FILE__));
 
-if (defined('SUMEDIA_BASE_VERSION')) {
+require_once(__DIR__ . str_replace('/', DIRECTORY_SEPARATOR, '/inc/functions.php'));
+require_once(__DIR__ . \Sumedia\GFont\ds('/src/Sumedia/GFont/Base/Autoloader.php'));
 
-    define('SUMEDIA_GFONT_VERSION', '0.2.1');
-    define('SUMEDIA_GFONT_PLUGIN_NAME', dirname(plugin_basename(__FILE__)));
+$autoloader = \Sumedia\GFont\Base\Autoloader::get_instance();
+$autoloader->register_autoloader();
+$autoloader->register_autoload_dir('src');
 
-    $autoloader = Sumedia_Base_Autoloader::get_instance();
-    $autoloader->register_autoload_dir(SUMEDIA_GFONT_PLUGIN_NAME, 'inc');
-    $autoloader->register_autoload_dir(SUMEDIA_GFONT_PLUGIN_NAME, 'admin' . Suma\DS . 'view');
-    $autoloader->register_autoload_dir(SUMEDIA_GFONT_PLUGIN_NAME, 'admin' . Suma\DS . 'form');
-    $autoloader->register_autoload_dir(SUMEDIA_GFONT_PLUGIN_NAME, 'admin' . Suma\DS . 'table');
-    $autoloader->register_autoload_dir(SUMEDIA_GFONT_PLUGIN_NAME, 'admin' . Suma\DS . 'controller');
-
-    $plugin = new Sumedia_GFont_Plugin();
-    register_activation_hook(__FILE__, [$plugin, 'install']);
-    add_action('upgrader_process_complete', [$plugin, 'install']);
-    add_action('plugins_loaded', [$plugin, 'init'], 10);
-}
+$plugin = new \Sumedia\GFont\Plugin();
+register_activation_hook(__FILE__, [$plugin, 'install']);
+add_action('upgrader_process_complete', [$plugin, 'install']);
+$plugin->init();

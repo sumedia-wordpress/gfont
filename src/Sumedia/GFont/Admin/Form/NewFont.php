@@ -1,6 +1,8 @@
 <?php
 
-class Sumedia_GFont_Admin_Form_New extends Sumedia_Base_Form
+namespace Sumedia\GFont\Admin\Form;
+
+class NewFont extends \Sumedia\GFont\Base\Form
 {
     /**
      * @param array $request_data
@@ -9,7 +11,7 @@ class Sumedia_GFont_Admin_Form_New extends Sumedia_Base_Form
     public function is_valid_data(array $request_data)
     {
         $valid = true;
-        $messenger = Sumedia_Base_Messenger::get_instance();
+        $messenger = \Sumedia\GFont\Base\Messenger::get_instance();
 
         if (!isset($request_data['_wpnonce']) || !wp_verify_nonce($request_data['_wpnonce'])){
             $messenger->add_message($messenger::TYPE_ERROR, __('The form could not be verified, please try again', SUMEDIA_GFONT_PLUGIN_NAME));

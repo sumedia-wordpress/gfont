@@ -1,6 +1,8 @@
 <?php
 
-class Sumedia_GFont_Admin_Table_Fontlist extends WP_List_Table
+namespace Sumedia\Gfont\Admin\Table;
+
+class Fontlist extends \WP_List_Table
 {
     var $_table_name = 'sumedia_gfont_fonts';
 
@@ -46,7 +48,7 @@ class Sumedia_GFont_Admin_Table_Fontlist extends WP_List_Table
     function get_bulk_actions()
     {
         return array(
-            'delete' => __('Delete', SUMEDIA_GFONT_PLUGIN_NAME)
+            'Delete' => __('Delete', SUMEDIA_GFONT_PLUGIN_NAME)
         );
     }
 

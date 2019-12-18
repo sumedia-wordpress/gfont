@@ -1,8 +1,8 @@
 <?php
 
-require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+namespace Sumedia\GFont;
 
-class Sumedia_GFont_Db_Installer
+class DbInstaller
 {
     /**
      * @var string
@@ -54,7 +54,7 @@ class Sumedia_GFont_Db_Installer
             `fontname` VARCHAR(128) NOT NULL,            
             `use_flag` INT(1)
         ) $charset_collate;";
-        dbDelta($sql);
+        $wpdb->query($sql);
     }
 
     protected function migrate_table()

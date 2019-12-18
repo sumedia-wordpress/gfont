@@ -2,8 +2,8 @@
 Contributors: sumediawebdesign
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=E6825AJ567QMA&source=url
 Tags: fonts, data privacy, google
-Requires at least: 5.0
-Tested up to: 5.3
+Requires at least: 5.3
+Tested up to: 5.3.1
 Stable tag: 5.3
 Requires PHP: 5.6.0
 License: GPL-3.0-or-later

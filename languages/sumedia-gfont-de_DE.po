@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sumedia-gfont\n"
-"POT-Creation-Date: 2019-12-15 15:05+0100\n"
-"PO-Revision-Date: 2019-12-15 15:06+0100\n"
+"POT-Creation-Date: 2019-12-18 06:45+0100\n"
+"PO-Revision-Date: 2019-12-18 06:47+0100\n"
 "Last-Translator: Sven Ullmann <kontakt@sumedia-webdesign.de>\n"
 "Language-Team: Sven Ullmann <kontakt@sumedia-webdesign.de>\n"
 "Language: de_DE\n"
@@ -22,97 +22,169 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 
-#: admin/controller/class-admin-controller-delete.php:35
+#: src/Sumedia/GFont/Admin/Controller/Delete.php:44
 msgid "The font has been successfully removed."
 msgstr "Der Font wurde erfolgreich entfernt."
 
-#: admin/controller/class-admin-controller-fontlist.php:11
-#: admin/controller/class-admin-controller-new.php:11
+#: src/Sumedia/GFont/Admin/Controller/Fontlist.php:13
+#: src/Sumedia/GFont/Admin/Controller/NewFont.php:13
+#: src/Sumedia/GFont/Admin/View/Menu.php:38
 msgid "Google Fonts"
 msgstr "Google Fonts"
 
-#: admin/controller/class-admin-controller-fontlist.php:12
-msgid "Configuration"
-msgstr "Konfiguration"
+#: src/Sumedia/GFont/Admin/Controller/Fontlist.php:14
+msgid "Fontlist"
+msgstr "Fontliste"
 
-#: admin/controller/class-admin-controller-fontlist.php:16
-#: admin/controller/class-admin-controller-new.php:16
-msgid "Back to the plugin overview"
-msgstr "Zurück zur Plugin Übersicht"
+#: src/Sumedia/GFont/Admin/Controller/NewFont.php:14
+#: templates/admin/fontlist.phtml:14 templates/admin/newfont.phtml:14
+msgid "Add new font"
+msgstr "Neue Schriftart hinzufügen"
 
-#: admin/controller/class-admin-controller-new.php:12 inc/class-plugin.php:40
-#: admin/templates/fontlist.phtml:14 admin/templates/new.phtml:14
-msgid "Create new"
-msgstr "Neu erstellen"
+#: src/Sumedia/GFont/Admin/Controller/NewFont.php:18
+msgid "Google font list"
+msgstr "Google-Schriftartliste"
 
-#: admin/controller/class-admin-controller-new.php:20
-msgid "Back to the google fontlist"
-msgstr "Zurück zur Google Fontliste"
-
-#: admin/controller/class-admin-controller-new.php:35
+#: src/Sumedia/GFont/Admin/Controller/NewFont.php:33
 msgid "The font has been fetched from google."
 msgstr "Der Font wurde von Google geholt."
 
-#: admin/form/class-admin-form-new.php:15
+#: src/Sumedia/GFont/Admin/Form/NewFont.php:17
 msgid "The form could not be verified, please try again"
 msgstr ""
 "Das Formular konnte nicht verifiziert werden, bitte versuchen Sie es erneut"
 
-#: admin/form/class-admin-form-new.php:20
-#: admin/form/class-admin-form-new.php:30
+#: src/Sumedia/GFont/Admin/Form/NewFont.php:22
+#: src/Sumedia/GFont/Admin/Form/NewFont.php:32
 #, php-format
 msgid "Missing parameter: %s."
 msgstr "Fehler Parameter: %s."
 
-#: admin/form/class-admin-form-new.php:25
+#: src/Sumedia/GFont/Admin/Form/NewFont.php:27
 msgid "The given Google URL seems not to be valid."
 msgstr "Die angegebene Google-URL scheint ungültig zu sein."
 
-#: admin/form/class-admin-form-new.php:35
+#: src/Sumedia/GFont/Admin/Form/NewFont.php:37
 msgid "Invalid Font Name"
 msgstr "Ungültiger Schriftname"
 
-#: admin/table/class-admin-table-fontlist.php:11
+#: src/Sumedia/GFont/Admin/Table/Fontlist.php:13
 msgid "ID"
 msgstr "ID"
 
-#: admin/table/class-admin-table-fontlist.php:12
+#: src/Sumedia/GFont/Admin/Table/Fontlist.php:14
 msgid "Google URL"
 msgstr "Google URL"
 
-#: admin/table/class-admin-table-fontlist.php:13
+#: src/Sumedia/GFont/Admin/Table/Fontlist.php:15
 msgid "Font Name"
 msgstr "Schriftname"
 
-#: admin/table/class-admin-table-fontlist.php:49
+#: src/Sumedia/GFont/Admin/Table/Fontlist.php:51
 msgid "Delete"
 msgstr "Löschen"
 
-#: inc/class-plugin.php:36 admin/templates/fontlist.phtml:13
-msgid "Fontlist"
-msgstr "Fontliste"
+#: src/Sumedia/GFont/Admin/View/Heading.php:38
+msgid "Google Font"
+msgstr "Google Schriftart"
 
-#: admin/templates/fontlist.phtml:18
+#: src/Sumedia/GFont/Admin/View/Heading.php:39
+#: templates/admin/fontlist.phtml:13
+msgid "Font list"
+msgstr "Schriftartenliste"
+
+#: src/Sumedia/GFont/Admin/View/Menu.php:39
+msgid "GFont"
+msgstr "GFont"
+
+#: src/Sumedia/GFont/Admin/View/Menu.php:50
+msgid "Sumedia"
+msgstr "Sumedia"
+
+#: src/Sumedia/GFont/Base/Messenger.php:55
+msgid "The given message is not of type string"
+msgstr "Die übergebene Mitteilung ist kein String"
+
+#: src/Sumedia/GFont/Base/Repository.php:40
+msgid "\"row_count\" is not numeric"
+msgstr "\"row_count\" ist nicht numerisch"
+
+#: src/Sumedia/GFont/Base/Repository.php:44
+msgid "\"offset\" is not numeric"
+msgstr "\"offset\" is nicht numerisch"
+
+#: src/Sumedia/GFont/Base/Repository.php:141
+msgid "Given value is not a string"
+msgstr "Der übergebene Wert is kein String"
+
+#: src/Sumedia/GFont/Base/Repository.php:145
+msgid "Given field is not a string"
+msgstr "Das übergebene Feld is kein String"
+
+#: src/Sumedia/GFont/Base/Repository.php:181
+msgid "There is more than one result for findOne"
+msgstr "Es gibt mehr als ein Ergebniss für fineOne"
+
+#: src/Sumedia/GFont/Base/Repository.php:192
+#: src/Sumedia/GFont/Base/Repository.php:209
+msgid "Given id is not in correct type"
+msgstr "Die übergebene ID ist nicht vom korrekten Typ"
+
+#: src/Sumedia/GFont/Base/Repository.php:213
+#: src/Sumedia/GFont/Base/Repository.php:234
+msgid "Got invalid data"
+msgstr "Fehlerhafte Daten"
+
+#: src/Sumedia/GFont/Base/View.php:49
+#, php-format
+msgid "No property setted with name \"%s\""
+msgstr "Diese Variable existiert nicht \"%s\""
+
+#: templates/admin/fontlist.phtml:18
 msgid "Search"
 msgstr "Suche"
 
-#: admin/templates/new.phtml:17
+#: templates/admin/fontlist.phtml:25
+msgid "Integrate in your theme"
+msgstr "Integration in Ihr Theme"
+
+#: templates/admin/fontlist.phtml:26
+msgid ""
+"If you want to use the new font have a look at the upper table where is "
+"defined HTML class: your-font-name."
+msgstr ""
+"Wenn Sie die neue Schriftart verwenden möchten, werfen Sie einen Blick auf "
+"die obere Tabelle, in der die HTML-Klasse definiert ist: your-font-name."
+
+#: templates/admin/fontlist.phtml:27
+msgid ""
+"You can add this class to your editor in order to display the text in this "
+"font."
+msgstr ""
+"Sie können diese Klasse ihrem Editor hinzufügen, um den Text in dieser "
+"Schriftart anzuzeigen."
+
+#: templates/admin/heading.phtml:14
+msgid "Version"
+msgstr "Version"
+
+#: templates/admin/newfont.phtml:17
 msgid "Google Font Url"
 msgstr "Google Font URL"
 
-#: admin/templates/new.phtml:25
+#: templates/admin/newfont.phtml:25
 msgid "Font Name (CSS)"
 msgstr "Font Name (CSS)"
 
-#: admin/templates/new.phtml:33
-msgid "Create now"
-msgstr "Jetzt anlegen"
+#: templates/admin/newfont.phtml:33
+msgid "Create"
+msgstr "Erstellen"
 
-#: admin/templates/new.phtml:38
+#: templates/admin/newfont.phtml:38
 msgid "Add a new Font from Google"
 msgstr "Einen neuen Font von Google hinzufügen"
 
-#: admin/templates/new.phtml:41
+#: templates/admin/newfont.phtml:41
 #, php-format
 msgid ""
 "Navigate to Google fonts and select and modify the font you wish.<br />\n"
@@ -134,14 +206,6 @@ msgstr ""
 "Name, keine Sammlung.<br>\n"
 "                <br>%s"
 
-#: admin/templates/plugin.phtml:12
-msgid ""
-"This plugin provide a selection of the Google Fonts Library with Open Font "
-"licenced fonts."
-msgstr ""
-"Dieses Plugin stellt eine Kollektion aus der Google Fonts Bilbliothek unter "
-"der Open Font Lizenz zur Verfügung."
-
 #. Plugin Name of the plugin/theme
 msgid "Sumedia GFont"
 msgstr "Sumedia GFont"
@@ -161,6 +225,25 @@ msgstr "Sven Ullmann"
 #. Author URI of the plugin/theme
 msgid "https://www.sumedia-webdesign.de"
 msgstr "https://www.sumedia-webdesign.de"
+
+#~ msgid "Configuration"
+#~ msgstr "Konfiguration"
+
+#~ msgid "Back to the plugin overview"
+#~ msgstr "Zurück zur Plugin Übersicht"
+
+#~ msgid "Back to the google fontlist"
+#~ msgstr "Zurück zur Google Fontliste"
+
+#~ msgid "Create now"
+#~ msgstr "Jetzt anlegen"
+
+#~ msgid ""
+#~ "This plugin provide a selection of the Google Fonts Library with Open "
+#~ "Font licenced fonts."
+#~ msgstr ""
+#~ "Dieses Plugin stellt eine Kollektion aus der Google Fonts Bilbliothek "
+#~ "unter der Open Font Lizenz zur Verfügung."
 
 #~ msgid "Use this font"
 #~ msgstr "Font verwenden"

@@ -1,12 +1,14 @@
 <?php
 
-class Sumedia_GFont_Font_Fetcher
+namespace Sumedia\GFont;
+
+class FontFetcher
 {
     protected $font_dir;
 
     public function __construct()
     {
-        $this->font_dir = wp_get_upload_dir()['basedir'] . Suma\DS . SUMEDIA_GFONT_PLUGIN_NAME;
+        $this->font_dir = wp_get_upload_dir()['basedir'] . DS . SUMEDIA_GFONT_PLUGIN_NAME;
         if (!file_exists($this->font_dir)) {
             mkdir($this->font_dir, 0777, true);
         }
@@ -46,13 +48,13 @@ class Sumedia_GFont_Font_Fetcher
             $this->fetch_webfont_urls($google_url, 'Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0)')
         );
 
-        $dir = $this->font_dir . Suma\ds('/webfonts/' . $font_name);
+        $dir = $this->font_dir . ds('/webfonts/' . $font_name);
         if (!file_exists($dir)) {
             mkdir($dir, 0777, true);
         }
 
         foreach ($files as $ext => $file) {
-            copy($file, $dir . Suma\DS . $font_name . '.' . $ext);
+            copy($file, $dir . DS . $font_name . '.' . $ext);
         }
 
         // generated local content, no extern or input involved
@@ -121,11 +123,10 @@ class Sumedia_GFont_Font_Fetcher
             }
         }
 
-        $font_url = wp_get_upload_dir()['baseurl'] . '/' . SUMEDIA_GFONT_PLUGIN_NAME . '/webfonts/' . $font_name . '/' . $font_name;
-        $style .= 'src: url(\'' . $font_url . '.eot?#iefix\') format(\'embedded-opentype\'),';
-        $style .= 'url(\'' . $font_url . '.woff\') format(\'woff\'),';
-        $style .= 'url(\'' . $font_url . '.woff2\') format(\'woff2\'),';
-        $style .= 'url(\'' . $font_url . '.ttf\')  format(\'truetype\');';
+        $style .= 'src: url(\'' . $font_name . '.eot?#iefix\') format(\'embedded-opentype\'),';
+        $style .= 'url(\'' . $font_name . '.woff\') format(\'woff\'),';
+        $style .= 'url(\'' . $font_name . '.woff2\') format(\'woff2\'),';
+        $style .= 'url(\'' . $font_name . '.ttf\')  format(\'truetype\');';
         $style .= '}';
         $style .= '.' . $font_name . ' { font-family: ' . $font_name . '; }';
 
